@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "odnoklassniki-parser"
+version = "1.0.0"
+description = "Parses posts (images and text) from specified groups"
+authors = ["Ivan Nedobezhkin <inedobezkin@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+scrapy = "^2.10.1"
+sqlalchemy = "^2.0.20"
+pydantic = "^2.3.0"
+pydantic-settings = "^2.0.3"
+psycopg2-binary = "^2.9.7"
+scrapy-playwright = "^0.0.32"
+apscheduler = "^3.10.4"
+beautifulsoup4 = "^4.12.2"
+imagehash = "^4.3.1"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
