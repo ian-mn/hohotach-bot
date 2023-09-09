@@ -1,9 +1,8 @@
+from itemadapter import ItemAdapter, is_item
 from scrapy import signals
-from itemadapter import is_item, ItemAdapter
 
 
 class OdnoklassnikiParserSpiderMiddleware:
-
     @classmethod
     def from_crawler(cls, crawler):
         s = cls()
