@@ -1,11 +1,12 @@
 import json
+import uuid
 from datetime import datetime
 
 from odnoklassniki_parser.settings import DBSettings
+from psycopg2.errors import UniqueViolation
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.orm import declarative_base
-from psycopg2.errors import UniqueViolation
 
 settings = DBSettings()
 
@@ -34,11 +35,21 @@ class Meme(Base):
     __tablename__ = "memes"
 
     hashsum = Column(String(), primary_key=True)
-    image_url = Column(String(), nullable=False)
+    image_url = Column(String(), nullable=False, unique=True)
     description = Column(String(), nullable=True)
     likes = Column(Integer(), default=0)
     dislikes = Column(Integer(), default=0)
     group_url = Column(String(), ForeignKey("groups.url"))
+    created_on = Column(DateTime(), default=datetime.now())
+
+
+class Reaction(Base):
+    __tablename__ = "reactions"
+
+    reaction_id = Column(String(), primary_key=True, default=uuid.uuid4())
+    user_id = Column(String(), nullable=False)
+    image_url = Column(String(), ForeignKey("memes.image_url"), nullable=False)
+    reaction_type = Column(String(), nullable=False)
     created_on = Column(DateTime(), default=datetime.now())
 
 
