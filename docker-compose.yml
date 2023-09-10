@@ -26,7 +26,20 @@ services:
       db:
         condition: service_healthy
     networks:
-    - memes
+      - memes
+
+  api:
+    build:
+      context: ./api
+    env_file:
+      - ./.env
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - memes
 
 networks:
   memes:
