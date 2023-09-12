@@ -41,5 +41,16 @@ services:
     networks:
       - memes
 
+  bot:
+    build:
+      context: ./bot
+    env_file:
+      - ./.env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - memes
+
 networks:
   memes:

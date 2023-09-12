@@ -16,7 +16,7 @@ class DBExctractor:
     @contextmanager
     def __conn_context(self):
         """PostgreSQL connection context manager."""
-        conn = psycopg2.connect(**self.settings.dict(), cursor_factory=DictCursor)
+        conn = psycopg2.connect(**self.db_settings.dict(), cursor_factory=DictCursor)
         psycopg2.extras.register_uuid()
         yield conn
         conn.close()
@@ -41,6 +41,7 @@ class DBExctractor:
             curs.execute(
                 f"""
                 select
+                    hashsum,
                     image_url,
                     description
                 from memes
